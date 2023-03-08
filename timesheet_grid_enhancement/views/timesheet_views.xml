@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_timesheet_grid_nib" model="ir.ui.view">
+       <field name="name">Timesheet grid</field>
+       <field name="model">account.analytic.line</field>
+       <field name="priority">100</field>
+       <field name="inherit_id" ref="timesheet_grid.timesheet_view_grid"/>
+       <field name="arch" type="xml">
+           <xpath expr="//grid" position="attributes">
+               <attribute name="js_class">timer_grid_enhanced</attribute>
+           </xpath>
+           <xpath expr="//field[@name='project_id']" position="attributes">
+               <attribute name="section">1</attribute>
+           </xpath>
+       </field>
+    </record>
+
+    <record id="view_timesheet_grid_manager_nib" model="ir.ui.view">
+       <field name="name">Timesheet grid</field>
+       <field name="model">account.analytic.line</field>
+       <field name="priority">100</field>
+       <field name="inherit_id" ref="timesheet_grid.timesheet_view_grid_by_employee_editable_manager"/>
+       <field name="arch" type="xml">
+           <xpath expr="//grid" position="attributes">
+               <attribute name="js_class">timesheet_grid_enhanced</attribute>
+           </xpath>
+       </field>
+    </record>
+
+    <record id="view_timesheet_tree_nib" model="ir.ui.view">
+       <field name="name">Timesheet tree</field>
+       <field name="model">account.analytic.line</field>
+       <field name="priority">100</field>
+       <field name="inherit_id" ref="timesheet_grid.timesheet_view_tree_colored"/>
+       <field name="arch" type="xml">
+           <xpath expr="//field[@name='unit_amount']" position="attributes">
+               <attribute name="widget">timesheet_uom</attribute>
+           </xpath>
+       </field>
+    </record>
+
+</odoo>

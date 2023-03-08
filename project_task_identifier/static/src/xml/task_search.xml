@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="WebClient.TaskSearch">
+    <li class="o_task_search_menu" role="menuitem">
+        <a class="o_task_search_menu">
+            <input type="text" class="o_task_search o_input badge-pill" accesskey="/" placeholder="Task identifier"/>
+        </a>
+    </li>
+</t>
+
+</templates>

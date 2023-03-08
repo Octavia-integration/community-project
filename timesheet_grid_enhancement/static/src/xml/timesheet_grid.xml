@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="timesheet_grid_enhancement.GroupedGridBody" t-inherit="web_grid.GroupedGridBody" t-inherit-mode="extension" owl="1">
+        <xpath expr="//tbody" position="replace">
+            <t t-if="grid.totals.super">
+                <tbody class="o_grid_section">
+                    <tr>
+                        <th>
+                            <t t-if="grid.__label" t-esc="grid.__label[1]"/>
+                            <t t-else="">Undefined</t>
+                        </th>
+                        <t t-foreach="columns" t-as="column" t-key="column_index">
+                            <td t-att-class="{
+                                     o_grid_current: column.is_current,
+                                     o_grid_unavailable: column.is_unavailable,
+                                    'text-danger': grid.totals.columns[column_index] lt 0,
+                                    'o_grid_cell_null': grid.totals.columns[column_index] == 0,
+                                }">
+
+                                <t t-if="hasComponent">
+                                    <t t-component="component"
+                                        cellValue="grid.totals.columns[column_index]"
+                                        readonly="true"
+                                        isInput="false"
+                                        fieldInfo="props.fields[props.cellField]"
+                                        nodeOptions="props.cellComponentOptions"
+                                        isTotal="true"/>
+                                </t>
+                                <div t-else="" t-esc="_format(grid.totals.columns[column_index])"/>
+                            </td>
+                        </t>
+                        <t t-if="props.range !== 'day' and !props.hideLineTotal" >
+                            <td class="o_grid_total"
+                                t-att-class="{
+                                    'text-danger': grid.totals.super lt 0,
+                                    'o_grid_cell_null': grid.totals.super == 0,
+                                    }">
+                                <t t-if="hasComponent">
+                                    <t t-component="component"
+                                        cellValue="grid.totals.super"
+                                        readonly="true"
+                                        isInput="false"
+                                        fieldInfo="props.fields[props.cellField]"
+                                        nodeOptions="props.cellComponentOptions"
+                                        isTotal="true"/>
+                                </t>
+                                <div t-else="" t-esc="_format(grid.totals.super)"/>
+                            </td>
+                        </t>
+                    </tr>
+                    <t t-call="web_grid.GridRows">
+                        <t t-set="groupTotals" t-value="grid.totals" />
+                        <t t-set="rows" t-value="grid.rows"/>
+                        <t t-set="path" t-value="[grid_index, 'grid']"/>
+                    </t>
+                </tbody>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="timesheet_grid_enhancement.GridRows" t-inherit="web_grid.GridRows" t-inherit-mode="extension" owl="1">
+        <xpath expr="//tr" position="replace">
+            <t t-if="env.session.timesheet_grid_show_empty_lines or groupTotals.rows[rowlabel_index]">
+                <tr>
+                    <th>
+                        <div class="ml-3">
+                            <t t-foreach="grid.rows[rowlabel_index].label" t-as="label" t-key="label_index">
+                                <div t-if="label or grid.rows[rowlabel_index].label.length === 1" t-att-title="label"
+                                    class="o_grid_row_header_part"
+                                    t-att-class="{o_grid_text_muted: !label }">
+                                    <t t-if="label" t-esc="label"/>
+                                    <t t-else="">Undefined</t>
+                                </div>
+                            </t>
+                        </div>
+                    </th>
+                    <t t-foreach="row" t-as="cell" t-key="cell_index">
+                        <t t-set="rowIndex" t-value="rowlabel_index"/>
+                        <t t-call="web_grid.Cell" />
+                    </t>
+                    <t t-if="props.range !== 'day' and !props.hideLineTotal" >
+                        <td class="o_grid_total"
+                            t-att-class="{
+                                'text-danger': groupTotals.rows[rowlabel_index] lt 0,
+                                'o_grid_cell_empty': groupTotals.rows[rowlabel_index] == 0,
+                            }">
+                            <t t-if="hasComponent">
+                                <t t-component="component"
+                                    cellValue="groupTotals.rows[rowlabel_index]"
+                                    readonly="true"
+                                    isInput="false"
+                                    fieldInfo="props.fields[props.cellField]"
+                                    nodeOptions="props.cellComponentOptions"
+                                    isTotal="true"/>
+                                </t>
+                            <div t-else="" t-esc="_format(groupTotals.rows[rowlabel_index])"/>
+                        </td>
+                    </t>
+                </tr>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="timesheet_grid_enhancement.timer_header" t-inherit="timesheet_grid.timer_header" t-inherit-mode="extension" owl="1">
+        <xpath expr="//input[@t-ref='inputDescription']/.." position="attributes">
+            <attribute name="class">p-2 input_description o_required_modifier</attribute>
+        </xpath>
+    </t>
+</templates>

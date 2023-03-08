@@ -1,2 +1,3 @@
 # community-project
-Oodini's public modules linked to Projects
+
+Repository for modules who impacts the Project application

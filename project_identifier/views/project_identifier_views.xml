@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="project_identifier_form" model="ir.ui.view">
+        <field name="name">project.identifier.form</field>
+        <field name="model">project.identifier</field>
+        <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h1>
+                            <field name="name" readonly="1" class="oe_read_only"/>
+                        </h1>
+                        <group>
+                            <field name="key"/>
+                        </group>
+                    </sheet>
+                </form>
+        </field>
+    </record>
+
+    <record id="project_identifier_tree" model="ir.ui.view">
+        <field name="name">project.identifier.tree</field>
+        <field name="model">project.identifier</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="key"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

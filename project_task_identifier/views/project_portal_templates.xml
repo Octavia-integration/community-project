@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_projects_task_identifier" inherit_id="project.portal_my_projects">
+        <xpath expr="//span[@t-field='project.name']" position="before">
+            <t t-if="project.project_identifier_id.key"><span t-field="project.project_key"/> - </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_tasks_task_identifier" inherit_id="project.portal_my_tasks">
+        <xpath expr="//thead/tr/th[hasclass('text-left')]" position="replace">
+            <th class="text-left">Task Id</th>
+        </xpath>
+        <xpath expr="//span[@t-esc='task.id']/.." position="replace">
+            <td class="text-left">
+                <span t-esc="task.identifier"/>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="portal_my_task" inherit_id="project.portal_my_task">
+        <xpath expr="//span[@t-field='task.id']/.." position="replace">
+            <small class="text-muted"><span t-field="task.identifier"/></small>
+        </xpath>
+    </template>
+</odoo>

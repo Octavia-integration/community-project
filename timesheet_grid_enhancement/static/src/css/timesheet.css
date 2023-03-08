@@ -1,0 +1,6 @@
+.o_web_client .o_view_grid tbody .o_grid_input {
+    cursor: pointer;
+}
+.o_grid_timer_header {
+    display: none;
+}

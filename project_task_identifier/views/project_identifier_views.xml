@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_identifier_tree_inherited" model="ir.ui.view">
+        <field name="name">project.identifier.tree.inherited</field>
+        <field name="model">project.identifier</field>
+        <field name="inherit_id" ref="project_identifier.project_identifier_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='key']" position="after">
+                <field name="key_sequence_id"/>
+                <field name="partner_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    <act_window id="project_identifier_action"
+                name="Trigrams"
+                groups="project.group_project_manager"
+                res_model="project.identifier"
+                view_mode="tree" />
+
+    <menuitem name="Trigrams"
+              id="project_identifier_menuitem"
+              parent="project.menu_project_config"
+              sequence="11"
+              action="project_identifier_action"/>
+</odoo>

@@ -1,0 +1,22 @@
+.o_task_search_menu{
+    height:100%;
+    align-items: center;
+}
+
+.o_task_search{
+    height: 50%;
+}
+
+/* Safari 7.1+ */
+
+_::-webkit-full-page-media, _:future, :root .o_task_search {
+
+  height: 50%;
+  font: normal normal normal 10px/1 FontAwesome;
+
+}
+
+input.o_task_search{
+    display: inline-block;
+    padding-top: 2px;
+}

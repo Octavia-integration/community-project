@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_project_project_filter" model="ir.ui.view">
+        <field name="name">project.project.select</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="project_identifier_id" string="Trigram" filter_domain="[('project_identifier_id.key','ilike',self)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="edit_project">
+        <field name="name">edit_project</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="project_key_ids" invisible="1"/>
+                <field name="project_identifier_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_project_view_form_simplified" model="ir.ui.view">
+        <field name="name">project.project.view.form.simplified</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="partner_id"/>
+                <field name="company_id" invisible="1"/>
+                <field name="project_key_ids" invisible="1"/>
+                <field name="project_identifier_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
