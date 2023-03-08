@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_task_form2_inherited">
+        <field name="name">project.task.form.inherited</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='timesheet_ids']" position="after">
+                <field name="can_timesheet" invisible="1"/>
+                <div attrs="{'invisible':[('can_timesheet', '=', True)]}" style="color: red;" class="alert alert-info" role="alert">No Timesheets can be added to this task until the linked Sale Order is confirmed!</div>
+            </xpath>
+            <xpath expr="//field[@name='timesheet_ids']" position="attributes">
+                <attribute name="attrs">{'readonly':[('can_timesheet', '!=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='timesheet_ids']//tree//field[@name='so_line']" position="attributes">
+                <attribute name="attrs" eval="{'column_invisible': ['|', '&amp;', ('parent.is_project_map_empty', '=', True), ('parent.pricing_type', '!=', 'selected_rate'), ('parent.pricing_type', '!=', 'employee_rate')]}" />
+                <attribute name="readonly" eval="False" />
+                <attribute name="domain">[('display_type', '!=', 'line_section'),('product_id.type', '=', 'service'),('order_id.tasks_ids','in',[parent.id])]</attribute>
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="is_sale_order_to_display" invisible="1"/>
+                <field name="sale_order_id" attrs="{'invisible':[('is_sale_order_to_display', '!=', True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_line_id']" position="attributes">
+                <attribute name="attrs" >{'invisible': ['|', ('pricing_type','=','selected_rate'), '|', ('partner_id', '=', False), '&amp;', ('sale_order_id', '!=', False), ('sale_line_id', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_search_form" model="ir.ui.view">
+        <field name="name">project.task.search.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='project']" position="after">
+                    <filter string="Sale Order" name="groupby_sale_order_id" domain="[]" context="{'group_by': 'sale_order_id'}"/>
+                </xpath>
+                <xpath expr="//filter[@name='message_needaction']" position="after">
+                    <separator/>
+                    <filter string="Linked to SO" name="linked_sale_order" domain="[('sale_order_id', '!=', False)]"/>
+                    <filter string="Not Linked to SO" name="not_linked_sale_order" domain="[('sale_order_id', '=', False)]"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="quick_create_task_form" model="ir.ui.view">
+        <field name="name">project.task.form.quick_create</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="after">
+                <field name="company_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="sale_order_id" options="{'no_create': True}" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="task_kanban_inherited" model="ir.ui.view">
+        <field name="name">project.task.kanban.inherited</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field invisible="1" name="sale_order_id"/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="before">
+                <div style="font-size: 10px;">
+                    <field name="sale_order_id"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

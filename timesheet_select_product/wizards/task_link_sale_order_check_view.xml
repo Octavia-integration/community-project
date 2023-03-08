@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="task_link_sale_order_check_form_view" model="ir.ui.view">
+            <field name="name">task.link.sale.order.check.wizard.form</field>
+            <field name="model">task.link.sale.order.check.wizard</field>
+            <field name="arch" type="xml">
+                <form string="The given tasks already had linked SO">
+                    <field name='tasks_ids'>
+                        <tree string="Tasks with a Sale Order" create="false" colors="red">
+                            <field name="name" readonly="1" />
+                            <field name="project_id" readonly="1" />
+                            <field name="sale_order_id" readonly="1" string="Task Sale Order" />
+                        </tree>
+                    </field>
+                    <footer>
+                        <button string="Link Tasks" name="link_sale_order" type="object" class="oe_highlight"/>
+                        <button string="Skip" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

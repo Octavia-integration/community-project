@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="project_task_create_timesheet_view_form" model="ir.ui.view">
+        <field name="name">project.task.create.timesheet.wizard.form</field>
+        <field name="model">project.task.create.timesheet</field>
+        <field name="inherit_id" ref="hr_timesheet.project_task_create_timesheet_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='time_spent']" position="after">
+                <field name="so_line"
+                       attrs="{'invisible': [('task_id','=',False)]}"
+                       domain="[('display_type', '!=', 'line_section'),('order_id.tasks_ids','in',[task_id]),('product_id.is_timesheetable','=',True)]"
+                       options="{'no_create': True}"
+                       string="Sales Order Item"
+                       class="oe_inline"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

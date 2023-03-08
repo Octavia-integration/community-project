@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="KanbanView.Group">
+        <t t-jquery="a.o_kanban_toggle_fold" t-operation="after">
+            <t t-if="widget.permanent_fold">
+                <t t-if="widget.permanent_fold_available">
+                    <a role="menuitem" class="dropdown-item o_kanban_toggle_fold_permanently" href="#">Fold Permanently</a>
+                </t>
+                <t t-else="">
+                    <a role="menuitem" class="dropdown-item o_kanban_toggle_unfold_permanently" href="#">Unfold Permanently</a>
+                </t>
+            </t>
+        </t>
+    </t>
+</templates>

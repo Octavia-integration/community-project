@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_form_inherited">
+        <field name="name">account.move.form.timesheet</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+                <field name="timesheet_count" invisible="True" />
+                <button string="Refresh"
+                    name="refresh_qty_from_timesheets"
+                    type="object"
+                    icon="fa-refresh"
+                    attrs="{'invisible': [('timesheet_count','=', 0)]}"
+                />
+<!--                <button string="Refresh"-->
+<!--                    name="refresh_qty_from_timesheets"-->
+<!--                    type="object"-->
+<!--                    icon="fa-refresh"-->
+<!--                />-->
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

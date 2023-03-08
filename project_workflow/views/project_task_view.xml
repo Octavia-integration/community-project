@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">view_task_form2</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="clickable">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field class="nib task_categories_bar" name="step_id" widget="statusbar" clickable="1"
+                       domain="['&amp;', ('workflow_ids','in', workflow_id), '|',('hidden', '=', False), '|', ('id', '=', step_id), ('previous_step_ids', 'in', step_id)]"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="can_reopen" invisible="1"/>
+                <button name="do_reopen" string="Reopen" type="object" class="btn-primary nib next_step"
+                        attrs="{'invisible': [('can_reopen', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//label[@for='project_id']" position="before">
+                <field name="category_id" options="{'no_create': True}"/>
+                <field name="workflow_id" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='date_last_stage_update']" position="after">
+                <field name="times_reopened" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_tree2" model="ir.ui.view">
+        <field name="name">view_task_tree2</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='message_needaction']" position="before">
+                <field class="task_category_icon" name="category_icon" widget="image"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="before">
+                <field name="step_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_search_form" model="ir.ui.view">
+        <field name="name">view_task_search_form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="step_id"/>
+                <field name="category_id"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='project']" position="after">
+                <filter string="Step" name="step" context="{'group_by': 'step_id'}"/>
+                <filter string="Type" name="type" context="{'group_by': 'category_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_kanban" model="ir.ui.view">
+        <field name="name">view_task_kanban</field>
+        <field name="model">project.task</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="default_group_by">step_id</attribute>
+                <attribute name="group_create">0</attribute>
+                <attribute name="group_delete">0</attribute>
+                <attribute name="group_edit">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='legend_done']" position="after">
+                <field name="step_id"/>
+                <field name="times_reopened"/>
+            </xpath>
+            <xpath expr="//kanban//div" position="attributes">
+                <attribute name="t-attf-class" >{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} {{record.times_reopened.raw_value != 0 ? 'oe_kanban_border_bottom' : ''}} oe_kanban_card oe_kanban_global_click</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]//field[@name='priority']" position="before">
+                <span class="task_category_icon"><field name="category_icon" widget="image"/></span>
+            </xpath>
+            <xpath expr="//div[hasclass('o_kanban_record_body')]" position="inside">
+                <div class="oe_kanban_body_left">
+                    <span class="badge task_step_tag" t-if="record.step_id.value"><field class="task_step_tag" name="step_id"/></span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="quick_create_task_form" model="ir.ui.view">
+        <field name="name">project.task.form.quick_create</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="category_id" string = "Task Type" options="{'no_create': True}"/>
+                <field name="step_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

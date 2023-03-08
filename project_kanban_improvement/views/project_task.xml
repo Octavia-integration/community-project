@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_task_kanban_project_workflow" model="ir.ui.view">
+        <field name="name">view_task_kanban</field>
+        <field name="model">project.task</field>
+        <field name="priority">110</field>
+        <field name="inherit_id" ref="project_workflow.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_body')]" position="inside">
+                <div class="oe_kanban_body_right">
+                    <img t-att-src="kanban_image('res.partner', 'image_128', record.partner_id.raw_value)" t-att-title="record.partner_id.value" t-att-alt="record.partner_id.value" class="oe_kanban_logo"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_kanban_body_left')]" position="inside">
+                <span class="badge task_category_tag" t-if="record.task_category_id.value"><field class="task_category_tag" name="task_category_id"/></span>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

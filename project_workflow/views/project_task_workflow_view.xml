@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_workflow_form" model="ir.ui.view">
+        <field name="name">project_task_workflow_form</field>
+        <field name="model">project.task.workflow</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Development Workflow"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <label for="step_ids"/>
+                        <field name="step_ids" nolabel="1" colspan="2">
+                            <tree editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="stage_id"/>
+                                <field name="previous_step_ids" widget="many2many_tags" domain="[('id' ,'!=', context.get('active_id'))]"/>
+                                <field name="next_step_ids" widget="many2many_tags" domain="[('id' ,'!=', context.get('active_id'))]"/>
+                                <field name="is_reopen_available"/>
+                                <field name="hidden"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="start_step_id" options="{'no_create': True}"/>
+                        <field name="reopen_step_id" options="{'no_create': True}"/>
+                        <field name="end_step_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_task_workflow_tree" model="ir.ui.view">
+        <field name="name">project_task_workflow_tree</field>
+        <field name="model">project.task.workflow</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="step_ids" invisible="1"/>
+                <field name="start_step_id"/>
+                <field name="reopen_step_id"/>
+                <field name="end_step_ids" options="{'no_create': True}" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_task_workflow_action" model="ir.actions.act_window">
+        <field name="name">Workflows</field>
+        <field name="res_model">project.task.workflow</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Workflows" id="project_task_workflow_menuitem" groups="project.group_project_manager"
+              parent="project.menu_project_config" sequence="5" action="project_task_workflow_action"/>
+</odoo>

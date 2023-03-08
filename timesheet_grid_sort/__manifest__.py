@@ -11,10 +11,16 @@
     """,
     "author": "Niboo",
     "website": "https://www.niboo.com",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["timesheet_grid"],
-    "data": ["templates/assets_backend.xml"],
+    "data": [],
+    "assets": {
+        "web.assets_backend": [
+            "/timesheet_grid_sort/static/src/js/timer_grid_model.js",
+            "/timesheet_grid_sort/static/src/js/timesheet_grid_model.js",
+        ],
+    },
     "installable": True,
     "application": False,
 }

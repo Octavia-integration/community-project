@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_cat_tree" model="ir.ui.view">
+        <field name="name">project_task_cat_tree</field>
+        <field name="model">task.category</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <act_window id="project_task_cat_action"
+                name="Task Categories"
+                groups="project.group_project_manager"
+                res_model="task.category"
+                view_mode="tree"
+                />
+
+    <menuitem name="Task Categories" id="project_task_cat_menuitem"
+              parent="project.menu_project_config" sequence="7" action="project_task_cat_action"/>
+</odoo>

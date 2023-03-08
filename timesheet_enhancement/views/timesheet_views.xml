@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_timesheet_form_nib" model="ir.ui.view">
+       <field name="name">Timesheet form</field>
+       <field name="model">account.analytic.line</field>
+       <field name="priority">100</field>
+       <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+       <field name="arch" type="xml">
+           <xpath expr="//field[@name='unit_amount']" position="before">
+               <field name="is_name_mandatory" invisible="1"/>
+           </xpath>
+           <xpath expr="//field[@name='name']" position="attributes">
+               <attribute name="attrs">{'required': [('is_name_mandatory', '=', True)]}</attribute>
+           </xpath>
+
+           <xpath expr="//field[@name='task_id']" position="before">
+                <field name="show_archived_tasks" class="oe_edit_only"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_timesheet_line_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.tree.with.user</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="show_archived_tasks" class="oe_edit_only"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

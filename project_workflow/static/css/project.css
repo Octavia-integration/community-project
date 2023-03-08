@@ -1,0 +1,34 @@
+.task_step_tag{
+    min-height: 15px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task_category_icon{
+    max-height: 24px;
+    max-width: 24px;
+}
+
+.o_kanban_record_body{
+    display: flex;
+    flex-wrap: wrap;
+}
+.o_kanban_record_body .o_field_many2manytags{
+    width: 100%;
+}
+.oe_kanban_body_left {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+}
+.oe_kanban_body_left {
+    flex: 1 1 auto;
+}
+
+.o_kanban_view .oe_kanban_border_bottom{
+    border-bottom-color: palevioletred;
+    border-bottom-width: medium;
+    border-bottom-style: solid;
+}

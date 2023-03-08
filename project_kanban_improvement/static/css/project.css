@@ -1,0 +1,35 @@
+.oe_kanban_body_right {
+    margin-left: auto !important;
+}
+
+.oe_kanban_body_right .oe_kanban_logo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+[data-type="edit"]:hover {
+    text-decoration: underline;
+}
+
+.partner_image{
+    max-width: 90%;
+    width: auto;
+    max-height: 35px;
+    margin-left: 10px;
+}
+
+.partner_image_box{
+    height: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.task_category_tag{
+    min-height: 15px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 10px;
+}

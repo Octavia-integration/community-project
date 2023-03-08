@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="timesheet_link_invoice_form_view" model="ir.ui.view">
+            <field name="name">timesheet.link.invoice.wizard.form</field>
+            <field name="model">timesheet.link.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Link Invoice">
+                    <group>
+                        <group>
+                            <field name="invoice_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="show_all_invoices"/>
+                            <field name="invoice_partner_ids" string="Partner concerned" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <field name="invoice_partner_ids" invisible="1"/>
+                    <notebook>
+                        <page string="Timesheet Items">
+                            <p>Items already linked to an invoiced will be ignored</p>
+                            <field name='wizard_timesheet_ids'>
+                            <tree string="Selected tasks" decoration-danger="timesheet_invoice_id != False">
+                                <field name="name" readonly="1" />
+                                <field name="timesheet_invoice_id" readonly="1" />
+                            </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Link Timesheets" name="link_invoice" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="link_timesheet_invoice" model="ir.actions.act_window">
+            <field name="name">Link to Invoice</field>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="res_model">timesheet.link.invoice.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="timesheet_link_invoice_form_view"/>
+            <field name="context">{'default_wizard_timesheet_ids': active_ids}</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

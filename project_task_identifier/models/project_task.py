@@ -1,5 +1,5 @@
-# © 2020 Jérôme Guerriat, Sam Lefever, Curatolo Gabriel
-# © 2020 Niboo SPRL (<https://www.niboo.com/>)
+# © 2020-2022 Jérôme Guerriat, Sam Lefever, Curatolo Gabriel
+# © 2020-2022 Niboo SRL (<https://www.niboo.com/>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -33,7 +33,7 @@ class ProjectTask(models.Model):
     def _compute_identifier_number(self):
         for task in self:
             if task.identifier:
-                task.identifier_number = int(task.identifier.rsplit("-", 1)[1])
+                task.identifier_number = int(task.identifier.rsplit('-', 1)[1])
             else:
                 task.identifier_number = 0
 

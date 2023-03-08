@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+hr_timesheet_analysis_report_employee,hr.timesheet.analysis.report employee,model_hr_timesheet_analysis_report,base.group_user,1,1,1,1
+hr_timesheet_monthly_analysis_report_employee,hr.timesheet.monthly.analysis.report employee,model_hr_timesheet_monthly_analysis_report,base.group_user,1,1,1,1

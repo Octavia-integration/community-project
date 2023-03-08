@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_task_link_sale_order_wizard,access_task_link_sale_order_wizard,model_task_link_sale_order_wizard,base.group_user,1,1,1,0
+access_task_link_sale_order_check_wizard,access_task_link_sale_order_check_wizard,model_task_link_sale_order_check_wizard,base.group_user,1,1,1,0
+access_timesheet_link_invoice_wizard,access_timesheet_link_invoice_wizard,model_timesheet_link_invoice_wizard,base.group_user,1,1,1,0

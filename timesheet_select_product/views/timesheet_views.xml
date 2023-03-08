@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="timesheet_view_form" model="ir.ui.view">
+        <field name="name">account.analytic.line.form.inherited</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='task_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_timesheet_line_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.tree.with.user</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="invoice_state" invisible="True"/>
+                <field name="timesheet_invoice_id" invisible="True"/>
+                <field name="is_invoiceable" attrs="{'readonly': [('timesheet_invoice_id', '!=', False), ('invoice_state', '!=', 'draft')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_aaa_remove_link_to_invoice">
+        <field name="name">Unlink from invoice</field>
+        <field name="model_id" ref="model_account_analytic_line"/>
+        <field name="binding_model_id" ref="model_account_analytic_line" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.remove_link_to_invoice()
+        </field>
+    </record>
+</odoo>

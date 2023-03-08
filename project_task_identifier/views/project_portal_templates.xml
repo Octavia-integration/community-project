@@ -6,7 +6,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_tasks_task_identifier" inherit_id="project.portal_my_tasks">
+    <template id="portal_my_tasks_task_identifier" inherit_id="project.portal_tasks_list">
         <xpath expr="//thead/tr/th[hasclass('text-left')]" position="replace">
             <th class="text-left">Task Id</th>
         </xpath>

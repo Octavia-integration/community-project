@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.workschedule.history</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='o_work_employee_main']" position="inside">
+                <group string="Work Schedule History" name="workschedule_history">
+                    <field name="workschedule_history_ids" nolabel="1">
+                        <tree editable="top">
+                            <field name="workschedule_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- tree view -->
+    <record id="workschedule_history_tree_view" model="ir.ui.view">
+        <field name="name">hr.calendar.history.tree</field>
+        <field name="model">hr.calendar.history</field>
+        <field name="arch" type="xml">
+            <tree string="Workschedule History Tree" multi_edit="1" editable="top">
+                <field name="employee_id"/>
+                <field name="workschedule_id"/>
+                <field name="start_date" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- filters -->
+    <record id="workschedule_history_search" model="ir.ui.view">
+        <field name="name">hr.calendar.history.search</field>
+        <field name="model">hr.calendar.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <field name="workschedule_id" />
+                <field name="start_date" />
+                <field name="end_date" />
+            </search>
+        </field>
+    </record>
+
+    <record id="workschedule_history_list_action" model="ir.actions.act_window">
+        <field name="name">Workschedule History</field>
+        <field name="res_model">hr.calendar.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the first Workschedule History</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_workschedule_history" name="Workschedule History" parent="hr.menu_human_resources_configuration_employee"
+              action="workschedule_history_list_action" sequence="1"/>
+</odoo>

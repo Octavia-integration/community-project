@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <record id="view_hr_timesheet_monthly_analysis_report_search" model="ir.ui.view">
+            <field name="name">Search for Timesheet Monthly Analysis report</field>
+            <field name="model">hr.timesheet.monthly.analysis.report</field>
+            <field name="arch" type="xml">
+                <search string="Timesheet Monthly Analysis">
+                    <field name="employee_id"/>
+                    <field name="job_id"/>
+                    <field name="employee_company_id"/>
+                    <filter name="month" string="This month"
+                            domain="[
+                                ('date', '=', (context_today()).strftime('%Y-%m')),
+                            ]"/>
+                    <filter name="last_month" string="Last Month"
+                            domain="[
+                                ('date', '=', (context_today() + relativedelta(months=-1, day=1)).strftime('%Y-%m')),
+                            ]"/>
+                    <filter name="month_last_year" string="Same Month Last Year"
+                            domain="[
+                                ('date', '&gt;=', (context_today() + relativedelta(years=-1, day=1)).strftime('%Y-%m')),
+                            ]"/>
+                    <group expand="0" string="Hours">
+                        <filter name="missing_hours" string="Missing Hours"
+                                domain="[
+                                    ('missing_hours', '&gt;', 0),
+                                ]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_timesheet_monthly_analysis_report_pivot" model="ir.ui.view">
+            <field name="name">Timesheet Monthly Analysis report: Pivot</field>
+            <field name="model">hr.timesheet.monthly.analysis.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Timesheet Monthly Analysis">
+                    <field name="employee_id" type="row"/>
+                    <field name="expected_log_time" type="measure" widget="float_time"/>
+                    <field name="actual_logged_time" type="measure" widget="float_time"/>
+                    <field name="leave_logged_time" type="measure" widget="float_time"/>
+                    <field name="missing_hours" type="measure" widget="float_time"/>
+                    <field name="overtime" type="measure" widget="float_time"/>
+                    <field name="invoiceable_logged_time" type="measure" widget="float_time"/>
+                    <field name="to_invoice_logged_time" type="measure" widget="float_time"/>
+                    <field name="invoiced_logged_time" type="measure" widget="float_time"/>
+                    <field name="amount_invoiceable" type="measure" />
+                    <field name="net_invoiceable_vs_workschedule_ratio" type="measure" />
+                    <field name="net_invoiceable_vs_timesheeted_ratio" type="measure" />
+                    <field name="raw_invoiceable_vs_workschedule_ratio" type="measure" />
+                    <field name="raw_invoiceable_vs_timesheeted_ratio" type="measure" />
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_hr_timesheet_monthly_analysis_report" model="ir.actions.act_window">
+            <field name="name">Timesheet Monthly Analysis</field>
+            <field name="res_model">hr.timesheet.monthly.analysis.report</field>
+            <field name="view_mode">pivot</field>
+            <field name="context">{'search_default_month': True}</field>
+        </record>
+
+        <menuitem id="menu_hr_timesheet_monthly_analysis_report"
+                  parent="hr_timesheet.menu_hr_time_tracking"
+                  action="action_hr_timesheet_monthly_analysis_report"
+                  name="Timesheet Monthly Analysis"/>
+    </data>
+</odoo>

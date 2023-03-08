@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+hr_expected_log_time_report_employee,hr.expected.log.time.report employee,model_hr_expected_log_time_report,base.group_user,1,1,1,1
+hr_calendar_history_employee,hr.calendar.history employee,model_hr_calendar_history,base.group_user,1,1,1,1

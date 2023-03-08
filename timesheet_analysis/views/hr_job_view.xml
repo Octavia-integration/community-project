@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_hr_job_form" model="ir.ui.view">
+        <field name="name">hr.job.form.timesheet.target</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='recruitment']" position="after">
+                <group string="Timesheet" name="timesheet">
+                    <field name="timesheet_invoice_target" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
