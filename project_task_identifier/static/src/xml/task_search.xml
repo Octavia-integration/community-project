@@ -2,11 +2,11 @@
 <templates id="template" xml:space="preserve">
 
 <t t-name="WebClient.TaskSearch">
-    <div class="o_task_search_menu" role="menuitem">
+    <li class="o_task_search_menu" role="menuitem">
         <a class="o_task_search_menu">
             <input type="text" class="o_task_search o_input badge-pill" accesskey="/" placeholder="Task identifier"/>
         </a>
-    </div>
+    </li>
 </t>
 
 </templates>

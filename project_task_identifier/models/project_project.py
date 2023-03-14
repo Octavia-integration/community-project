@@ -1,5 +1,5 @@
-# © 2020-2022 Aurore Chevalier
-# © 2020-2022 Niboo SRL (<https://www.niboo.com/>)
+# © 2020 Aurore Chevalier
+# © 2020 Niboo SPRL (<https://www.niboo.com/>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models

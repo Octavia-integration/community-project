@@ -1,6 +1,8 @@
-# © 2020-2022 Aurore Chevalier
-# © 2020-2022 Niboo SRL (<https://www.niboo.com/>)
+# © 2020 Aurore Chevalier
+# © 2020 Niboo SPRL (<https://www.niboo.com/>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+import re
 
 from odoo import api, fields, models
 
@@ -10,9 +12,51 @@ class ProjectIdentifier(models.Model):
 
     key_sequence_id = fields.Many2one("ir.sequence", readonly=True)
 
+    partner_ids = fields.Many2many(
+        "res.partner",
+        "project_key_partner_rel",
+        "project_identifier_id",
+        "partner_id",
+        copy=False,
+    )
+
     code = fields.Char(
         "Sequence code", compute="_compute_code", store=True, readonly=True
     )
+
+    # OVERRIDE
+    @api.depends("key", "partner_ids")
+    def _compute_name(self):
+        """
+    This functions compute the name of the identifier to provide the result:
+
+    KEY (partner_1, partner_2, ...)
+    or just :
+    KEY
+    :return:
+        """
+        for identifier in self:
+            names = ", ".join(identifier.partner_ids.mapped("name"))
+            identifier.name = (
+                f"{identifier.key} ({names})"
+                if identifier.partner_ids
+                else f"{identifier.key}"
+            )
+
+    # OVERRIDE
+    def _inverse_name(self):
+        """
+        The inverse function is used to set the key directly from what's put
+        inside the name field.
+        This helps provide a seemles experience when creating a new Trigram,
+        as the field will mostly behave close to a Char field if you create
+        a new Trigram.
+        :return:
+        """
+        for identifier in self:
+            if identifier.name:
+                key = re.sub(r"\([^)]*\)", "", identifier.name.replace(" ", ""))
+                identifier.key = key
 
     @api.depends("key")
     def _compute_code(self):

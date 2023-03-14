@@ -2,7 +2,7 @@ odoo.define('timesheet_grid_enhancement.timer_grid_renderer', function (require)
     "use strict";
 
     const TimesheetGridRenderer = require("timesheet_grid.TimerGridRenderer")
-    const { useRef } = owl.hooks;
+    // const { useRef } = owl.hooks;
 
     class TimerGridRendererEnhanced extends TimesheetGridRenderer {
         _onFocusComponent(ev) {

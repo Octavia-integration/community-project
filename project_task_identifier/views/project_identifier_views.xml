@@ -8,32 +8,21 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='key']" position="after">
                 <field name="key_sequence_id"/>
+                <field name="partner_ids" widget="many2many_tags"/>
             </xpath>
         </field>
     </record>
 
-    <record id="project_identifier_form_inherited" model="ir.ui.view">
-        <field name="name">project.identifier.form.inherited</field>
-        <field name="model">project.identifier</field>
-        <field name="inherit_id" ref="project_identifier.project_identifier_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='key']" position="after">
-                <field name="key_sequence_id"/>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="project_identifier_action" model="ir.actions.act_window">
-        <field name="name">Trigrams</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">project.identifier</field>
-        <field name="view_mode">tree</field>
-    </record>
+    <act_window id="project_identifier_action"
+                name="Trigrams"
+                
+                groups="project.group_project_manager"
+                res_model="project.identifier"
+                view_mode="tree" />
 
     <menuitem name="Trigrams"
               id="project_identifier_menuitem"
               parent="project.menu_project_config"
               sequence="11"
-              groups="project.group_project_manager"
               action="project_identifier_action"/>
 </odoo>

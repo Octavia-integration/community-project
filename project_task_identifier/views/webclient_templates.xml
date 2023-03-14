@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_common_task_search" inherit_id="web.assets_common">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/project_task_identifier/static/src/js/task_search.js"></script>
+        </xpath>
+        <xpath expr="//link[last()]">
+            <link rel="stylesheet" type="text/scss" href="/project_task_identifier/static/src/css/task_search.css"/>
+        </xpath>
+    </template>
+</odoo>

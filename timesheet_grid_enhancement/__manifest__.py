@@ -14,22 +14,36 @@
     """,
     "author": "Niboo",
     "website": "https://www.niboo.com",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["timesheet_grid", "hr_timesheet"],
-    "data": ["views/res_config_settings_views.xml", "views/timesheet_views.xml"],
-    "assets": {
+    "data": [
+      
+        "views/res_config_settings_views.xml",
+        "views/timesheet_views.xml",
+    ],
+
+     "assets": {
+       
+        "web.assets_frontend": [
+            
+            ],
+
         "web.assets_backend": [
-            "/timesheet_grid_enhancement/static/src/js/timer_grid_controller.js",
-            "/timesheet_grid_enhancement/static/src/js/timer_grid_renderer.js",
+           "/timesheet_grid_enhancement/static/src/css/timesheet.css",
+           "/timesheet_grid_enhancement/static/src/js/timer_grid_controller.js",
             "/timesheet_grid_enhancement/static/src/js/timer_grid_enhancement.js",
+            "/timesheet_grid_enhancement/static/src/js/timer_grid_renderer.js",
             "/timesheet_grid_enhancement/static/src/js/timesheet_grid_controller.js",
-            "/timesheet_grid_enhancement/static/src/js/timesheet_grid_renderer.js",
             "/timesheet_grid_enhancement/static/src/js/timesheet_grid_enhancement.js",
-            "/timesheet_grid_enhancement/static/src/css/timesheet.css",
+            "/timesheet_grid_enhancement/static/src/js/timesheet_grid_renderer.js",
+            "/timesheet_grid_enhancement/static/src/xml/timesheet_grid.xml",
         ],
-        "web.assets_qweb": ["timesheet_grid_enhancement/static/src/xml/**/*"],
+       
     },
-    "installable": False,
+
+
+   
+    "installable": True,
     "application": False,
 }
