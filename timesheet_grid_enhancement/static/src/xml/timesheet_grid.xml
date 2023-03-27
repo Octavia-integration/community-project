@@ -102,7 +102,8 @@
     </t>
 
     <t t-name="timesheet_grid_enhancement.timer_header" t-inherit="timesheet_grid.timer_header" t-inherit-mode="extension" owl="1">
-        <xpath expr="//input[@t-ref='inputDescription']/.." position="attributes">
+        <xpath expr="//div[contains(@class, 'input_description')]" position="attributes">
+            
             <attribute name="class">p-2 input_description o_required_modifier</attribute>
         </xpath>
     </t>

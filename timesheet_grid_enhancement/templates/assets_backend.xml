@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="grid assets" inherit_id="web.assets_backend">
+        <xpath expr="link[last()]" position="after">
+            <link rel="stylesheet" href="/timesheet_grid_enhancement/static/src/css/timesheet.css" type="text/css"/>
+        </xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timer_grid_controller.js"/>
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timer_grid_enhancement.js"/>
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timer_grid_renderer.js"/>
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timesheet_grid_controller.js"/>
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timesheet_grid_enhancement.js"/>
+            <script type="text/javascript" src="/timesheet_grid_enhancement/static/src/js/timesheet_grid_renderer.js"/>
+        </xpath>
+    </template>
+</odoo>

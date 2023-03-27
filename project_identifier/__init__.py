@@ -1,5 +1,5 @@
-# © 2021-2022 Antoine Honinckx
-# © 2021-2022 Niboo SRL (https://www.niboo.com/)
+# © 2021 Antoine Honinckx
+# © 2021 Niboo SRL (https://www.niboo.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from . import models

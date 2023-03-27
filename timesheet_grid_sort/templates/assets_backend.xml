@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="grid assets" inherit_id="web.assets_backend">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/timesheet_grid_sort/static/src/js/timer_grid_model.js"/>
+            <script type="text/javascript" src="/timesheet_grid_sort/static/src/js/timesheet_grid_model.js"/>
+        </xpath>
+    </template>
+</odoo>

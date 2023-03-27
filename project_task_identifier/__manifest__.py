@@ -1,5 +1,5 @@
-# © 2020-2022-2022 Jérôme Guerriat, Sam Lefever, Curatolo Gabriel, Albin Gilles
-# © 2020-2022-2022 Niboo SRL (<https://www.niboo.com/>)
+# © 2020 Jérôme Guerriat, Sam Lefever, Curatolo Gabriel
+# © 2020 Niboo SPRL (<https://www.niboo.com/>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
@@ -7,12 +7,12 @@
     "category": "Generic Modules/Others",
     "summary": "Add an identifier on tasks (project-sequence number)",
     "website": "https://www.niboo.com/",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "description": """
 Project Task Identifier allows you to select an identifier for customers.
 This identifier will be used to generate a unique key for all project tasks
-related to the customer, making it easier to identify tasks.
+ related to the customer, making it easier to identify tasks.
         """,
     "author": "Niboo",
     "depends": ["project", "project_identifier"],
@@ -22,17 +22,32 @@ related to the customer, making it easier to identify tasks.
         "views/project_project_view.xml",
         "views/project_identifier_views.xml",
         "security/ir.model.access.csv",
+        # "views/webclient_templates.xml",
         "views/project_portal_templates.xml",
     ],
     "assets": {
-        "web.assets_common": [
-            "project_task_identifier/static/src/js/task_search.js",
-            "project_task_identifier/static/src/css/task_search.css",
+       
+        "web.assets_frontend": [
+            
+            ],
+        'web.assets_common': [
+            "/project_task_identifier/static/src/js/task_search.js",
+            "/project_task_identifier/static/src/css/task_search.css",
+            "/project_task_identifier/static/src/xml/task_search.xml",
+
+         ],
+        "web.assets_backend": [
+           
         ],
+        "web.assets_qweb": [
+            
+        ],
+       
     },
-    "qweb": ["static/src/xml/task_search.xml"],
+
+    "qweb": [],
     "images": ["static/description/project_task_identifier_cover.png"],
-    "installable": False,
+    "installable": True,
     "application": False,
     "post_load": "post_load",
 }
